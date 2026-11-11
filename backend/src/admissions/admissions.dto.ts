@@ -1,0 +1,38 @@
+import { Transform } from 'class-transformer';
+import { IsBoolean, IsDateString, IsEmail, IsIn, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
+const asBool = ({ value }: {value: unknown}) => value === true || value === 'true' || value === '1' || value === 'on';
+export class CreateAdmissionDto {
+  @IsString() @MaxLength(255) full_name!: string;
+  @IsString() gender!: string;
+  @IsDateString() date_of_birth!: string;
+  @IsString() @MaxLength(20) mobile_number!: string;
+  @IsOptional() @IsString() residence_phone?: string;
+  @IsOptional() @IsEmail() email?: string;
+  @IsString() address!: string;
+  @IsString() @MaxLength(10) pincode!: string;
+  @IsString() emergency_contact_name!: string;
+  @IsOptional() @IsString() emergency_contact_relationship?: string;
+  @IsString() emergency_contact_number!: string;
+  @IsString() parent_name!: string;
+  @IsString() parent_contact_number!: string;
+  @IsOptional() @IsString() parent_address?: string;
+  @IsOptional() @IsString() parent_pincode?: string;
+  @IsOptional() @IsString() occupation?: string;
+  @IsOptional() @IsString() office_address?: string;
+  @IsString() course_instrument!: string;
+  @IsOptional() @IsString() course_type?: string;
+  @IsOptional() @IsString() preferred_instructor?: string;
+  @IsString() preferred_class_timing!: string;
+  @IsDateString() start_date!: string;
+  @IsIn(['Monthly','Quarterly','Half Yearly','Yearly']) payment_mode!: string;
+  @IsOptional() @IsString() music_experience?: string;
+  @IsOptional() @IsString() previous_music_class?: string;
+  @IsOptional() @IsString() previous_music_class_name?: string;
+  @IsString() learning_reason!: string;
+  @IsOptional() @IsString() medical_conditions?: string;
+  @IsOptional() @IsString() hear_about_us?: string;
+  @Transform(asBool) @IsBoolean() declaration_accepted!: boolean;
+  @Transform(asBool) @IsBoolean() terms_accepted!: boolean;
+  @IsOptional() @Transform(asBool) @IsBoolean() marketing_consent?: boolean;
+  @IsString() @IsNotEmpty() digital_signature!: string;
+}

@@ -1,0 +1,1 @@
+import{Module}from'@nestjs/common';import{AuthModule}from'../auth/auth.module';import{PaymentsModule}from'../payments/payments.module';import{StudentController}from'./student.controller';import{StudentService}from'./student.service';@Module({imports:[AuthModule,PaymentsModule],controllers:[StudentController],providers:[StudentService]})export class StudentModule{}
