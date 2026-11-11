@@ -3,6 +3,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { api, media, message } from '../api';
 import { Alert, Empty, Hero, Loader } from '../components/Ui';
 import type { Item, Page } from '../types';
+import { TestimonialCarousel } from './ReplicaPages';
 
 type Settings = Record<string, string>;
 const plain = (html: unknown) => String(html || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -32,12 +33,7 @@ export function Home() {
 
     <section className="section section-wide stories-section">
       <SectionHeading eyebrow="Student Stories" title={<>What Our <em>Community</em> Says</>} />
-      <div className="testimonial-grid">
-        {data?.testimonials?.slice(0, 6).map((item: any) => <article className="testimonial-card" key={item.id}>
-          <span className="quote-mark">&ldquo;</span><p>{item.testimonial}</p>
-          <div className="testimonial-person">{item.image && <img src={media(item.image)} alt="" />}<div><h3>{item.name}</h3><span>{item.designation || 'Om Naad Community'}</span></div></div>
-        </article>)}
-      </div>
+      <TestimonialCarousel items={data?.testimonials || []} />
     </section>
 
     <section className="culture-section">
